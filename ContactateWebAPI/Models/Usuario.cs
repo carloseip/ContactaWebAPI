@@ -7,6 +7,7 @@ namespace ContactateWebAPI.Models
     {
         public Usuario()
         {
+            Contacto = new HashSet<Contacto>();
             TarjetaPresentacion = new HashSet<TarjetaPresentacion>();
         }
 
@@ -26,6 +27,7 @@ namespace ContactateWebAPI.Models
         public virtual CodigoPostal IdCodigoPostalNavigation { get; set; }
         public virtual Rol IdRolNavigation { get; set; }
         public virtual Sexo IdSexoNavigation { get; set; }
+        public virtual ICollection<Contacto> Contacto { get; set; }
         public virtual ICollection<TarjetaPresentacion> TarjetaPresentacion { get; set; }
     }
 }

@@ -1,3 +1,11 @@
+USE CONTACTATE_BD
+GO
+
+CREATE SCHEMA [utils]
+GO
+
+CREATE SCHEMA [appcontacta]
+GO
 
 CREATE TABLE [utils].[Acceso]
 ( 
@@ -33,16 +41,16 @@ ALTER TABLE [appcontacta].[CodigoPostal]
 	ADD PRIMARY KEY  CLUSTERED ([IdCodigoPostal] ASC)
 go
 
-CREATE TABLE [Contacto]
+CREATE TABLE [appcontacta].[Contacto]
 ( 
 	[IdTarjeta]          int  NOT NULL ,
 	[IdUsuario]          int  NOT NULL ,
-	[Estado]             char(18)  NULL ,
-	[Evento]             char(18)  NULL 
+	[Estado]             bit  NULL ,
+	[Evento]             varchar(50)  NULL 
 )
 go
 
-ALTER TABLE [Contacto]
+ALTER TABLE [appcontacta].[Contacto]
 	ADD PRIMARY KEY  CLUSTERED ([IdTarjeta] ASC,[IdUsuario] ASC)
 go
 
@@ -232,13 +240,13 @@ ALTER TABLE [utils].[UsuariosHash]
 go
 
 
-ALTER TABLE [Contacto]
+ALTER TABLE [appcontacta].[Contacto]
 	ADD  FOREIGN KEY ([IdTarjeta]) REFERENCES [appcontacta].[TarjetaPresentacion]([IdTarjeta])
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION
 go
 
-ALTER TABLE [Contacto]
+ALTER TABLE [appcontacta].[Contacto]
 	ADD  FOREIGN KEY ([IdUsuario]) REFERENCES [appcontacta].[Usuario]([IdUsuario])
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION
@@ -308,29 +316,16 @@ ALTER TABLE [appcontacta].[TarjetaPresentacion] WITH CHECK
 		ON UPDATE NO ACTION
 go
 
-ALTER TABLE [appcontacta].[TarjetaPresentacion]
-	  WITH CHECK CHECK CONSTRAINT [R_2]
-go
-
 ALTER TABLE [appcontacta].[TarjetaPresentacion] WITH CHECK 
 	ADD  FOREIGN KEY ([IdEmpresa]) REFERENCES [appcontacta].[Empresa]([IdEmpresa])
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION
 go
 
-ALTER TABLE [appcontacta].[TarjetaPresentacion]
-	  WITH CHECK CHECK CONSTRAINT [R_5]
-go
-
-
 ALTER TABLE [appcontacta].[Usuario] WITH CHECK 
 	ADD  FOREIGN KEY ([IdRol]) REFERENCES [appcontacta].[Rol]([IdRol])
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION
-go
-
-ALTER TABLE [appcontacta].[Usuario]
-	  WITH CHECK CHECK CONSTRAINT [R_1]
 go
 
 ALTER TABLE [appcontacta].[Usuario]
