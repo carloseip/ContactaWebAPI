@@ -81,6 +81,21 @@ namespace ContactateWebAPI.Controllers
             return CreatedAtAction("GetAcceso", new { id = acceso.IdAcceso }, acceso);
         }
 
+        // POST: api/Accesos/login
+        [HttpPost("login")]
+        public async Task<ActionResult<Usuario>> LoginUsuario(Acceso acceso)
+        {
+            var usuario = await _context.Acceso.FirstOrDefaultAsync(e => e.Correo.ToLower() == acceso.Correo.ToLower() && e.Contrasenia == acceso.Contrasenia);
+
+            if (usuario == null)
+            {
+                //return NotFound();
+                return BadRequest(new { mensaje = "Not", value = usuario });
+            }
+
+            return Ok(new { mensaje = "Ok", value = usuario });
+        }
+
         // DELETE: api/Accesos/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Acceso>> DeleteAcceso(int id)
