@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactateWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("Politica")]
     public class ValuesController : ControllerBase
     {
         // GET api/values

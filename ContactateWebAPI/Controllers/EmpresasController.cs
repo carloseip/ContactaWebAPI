@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ContactateWebAPI.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace ContactateWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("Politica")]
     public class EmpresasController : ControllerBase
     {
         private readonly CONTACTATE_BDContext _context;
