@@ -22,7 +22,7 @@ namespace ContactateWebAPI.Controllers
 
         // GET: api/Accesos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Acceso>>> GetAcceso()
+        public async Task<ActionResult<IEnumerable<Acceso>>> GetAccesos()
         {
             return await _context.Acceso.ToListAsync();
         }
@@ -37,8 +37,7 @@ namespace ContactateWebAPI.Controllers
             {
                 return NotFound();
             }
-
-            return acceso;
+            return Ok(acceso);
         }
 
         // PUT: api/Accesos/5

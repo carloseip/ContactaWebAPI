@@ -310,7 +310,7 @@ namespace ContactateWebAPI.Models
                 entity.ToTable("TarjetaPresentacion", "appcontacta");
 
                 entity.Property(e => e.Correo)
-                    .HasMaxLength(18)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Empresa)
@@ -323,12 +323,12 @@ namespace ContactateWebAPI.Models
 
                 entity.Property(e => e.Imagen).IsUnicode(false);
 
-                entity.Property(e => e.Ocupación)
+                entity.Property(e => e.Ocupacion)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Telefono)
-                    .HasMaxLength(18)
+                    .HasMaxLength(9)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdEmpresaNavigation)

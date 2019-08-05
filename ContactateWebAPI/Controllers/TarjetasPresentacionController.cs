@@ -22,23 +22,47 @@ namespace ContactateWebAPI.Controllers
 
         // GET: api/TarjetasPresentacion
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TarjetaPresentacion>>> GetTarjetaPresentacion()
+        public async Task<ActionResult> GetTarjetasPresentacion()
         {
-            return await _context.TarjetaPresentacion.ToListAsync();
+            var query = await _context.TarjetaPresentacion.Join(_context.Usuario, t => t.IdUsuario, u => u.IdUsuario,
+                (t, u) => new
+                {
+                    idTarjeta = t.IdTarjeta,
+                    usuario = $"{u.Nombres} {u.ApellidoPaterno} {u.ApellidoMaterno}",
+                    cargo = t.Ocupacion,
+                    especialidad = t.Especialidad,
+                    telefono = t.Telefono,
+                    correo = t.Correo,
+                    direccion = u.Direccion
+                }).ToListAsync();
+
+            return Ok(new { mensaje = "correcto", value = query });
         }
 
         // GET: api/TarjetasPresentacion/5
         [HttpGet("{id}")]
         public async Task<ActionResult<TarjetaPresentacion>> GetTarjetaPresentacion(int id)
         {
-            var tarjetaPresentacion = await _context.TarjetaPresentacion.FindAsync(id);
+            //var tarjetaPresentacion = await _context.TarjetaPresentacion.FindAsync(id);
 
-            if (tarjetaPresentacion == null)
+            var query = await _context.TarjetaPresentacion.Join(_context.Usuario, t => t.IdUsuario, u => u.IdUsuario,
+                (t, u) => new
+                {
+                    idTarjeta = t.IdTarjeta,
+                    usuario = $"{u.Nombres} {u.ApellidoPaterno} {u.ApellidoMaterno}",
+                    cargo = t.Ocupacion,
+                    especialidad = t.Especialidad,
+                    telefono = t.Telefono,
+                    correo = t.Correo,
+                    direccion = u.Direccion
+                }).Where(eval => eval.idTarjeta == id).FirstOrDefaultAsync();
+
+            if (query == null)
             {
                 return NotFound();
             }
 
-            return tarjetaPresentacion;
+            return Ok(new { mensaje = "correcto", value = query });
         }
 
         // PUT: api/TarjetasPresentacion/5

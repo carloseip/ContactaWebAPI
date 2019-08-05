@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace ContactateWebAPI.Models
@@ -25,9 +26,13 @@ namespace ContactateWebAPI.Models
         public int IdCodigoPostal { get; set; }
 
         public virtual CodigoPostal IdCodigoPostalNavigation { get; set; }
+        [JsonIgnore]
         public virtual Rol IdRolNavigation { get; set; }
+        [JsonIgnore]
         public virtual Sexo IdSexoNavigation { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Contacto> Contacto { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TarjetaPresentacion> TarjetaPresentacion { get; set; }
     }
 }

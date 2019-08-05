@@ -1,3 +1,6 @@
+CREATE DATABASE CONTACTATE_BD
+GO
+
 USE CONTACTATE_BD
 GO
 
@@ -180,14 +183,14 @@ go
 CREATE TABLE [appcontacta].[TarjetaPresentacion]
 ( 
 	[IdTarjeta]          int  IDENTITY ( 1,1 )  NOT NULL ,
-	[Ocupación]          varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS  NULL ,
+	[Ocupacion]          varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS  NULL ,
 	[Empresa]            varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS  NULL ,
 	[Especialidad]       varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS  NULL ,
 	[Imagen]             varchar(max) COLLATE SQL_Latin1_General_CP1_CI_AS  NULL ,
 	[IdUsuario]          int  NOT NULL ,
 	[IdEmpresa]          int  NULL ,
-	[Telefono]           char(18)  NULL ,
-	[Correo]             char(18)  NULL 
+	[Telefono]           char(9)  NULL ,
+	[Correo]             VARCHAR(50)  NULL 
 )
 go
 
@@ -257,10 +260,6 @@ ALTER TABLE [appcontacta].[Empresa] WITH CHECK
 	ADD  FOREIGN KEY ([IdRubro]) REFERENCES [appcontacta].[Rubro]([IdRubro])
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION
-go
-
-ALTER TABLE [appcontacta].[Empresa]
-	  WITH CHECK CHECK CONSTRAINT [R_6]
 go
 
 ALTER TABLE [appcontacta].[Empresa]
@@ -339,3 +338,12 @@ ALTER TABLE [appcontacta].[Usuario]
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION
 go
+
+
+INSERT INTO appcontacta.Rol VALUES('Usuario'),('Usuario Corporativo'),('Administrador'),('Super Administrador')
+
+INSERT INTO appcontacta.Sexo VALUES('Varón'),('Mujer')
+GO
+
+SELECT * FROM appcontacta.Sexo
+GO
