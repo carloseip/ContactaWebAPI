@@ -35,7 +35,8 @@ namespace ContactateWebAPI.Controllers
                     especialidad = t.Especialidad,
                     telefono = t.Telefono,
                     correo = t.Correo,
-                    direccion = u.Direccion
+                    direccion = u.Direccion,
+                    imagen = t.Imagen
                 }).ToListAsync();
 
             return Ok(new { mensaje = "correcto", value = query });
