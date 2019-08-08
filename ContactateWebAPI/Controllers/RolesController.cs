@@ -29,6 +29,20 @@ namespace ContactateWebAPI.Controllers
             return await _context.Rol.ToListAsync();
         }
 
+        // GET: api/Roles/arduino
+        [HttpGet("arduino/{msg}")]
+        public async Task<ActionResult<IEnumerable<Rol>>> GetNuevo(string msg)
+        {
+            Rol nuevo = new Rol
+            {
+                NombreRol = msg
+            };
+            _context.Rol.Add(nuevo);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRol", new { id = nuevo.IdRol }, nuevo);
+        }
+
         // GET: api/Roles/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Rol>> GetRol(int id)
